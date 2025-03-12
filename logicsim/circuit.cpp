@@ -155,6 +155,10 @@ bool Circuit::advance(std::ostream& os)
     ss << "@" << m_current_time << std::endl;
     bool updated = false;
 
+    // Print the heap before processing events
+    std::cout << "Heap before processing events: ";
+    m_pq.printHeap();
+
     while (!m_pq.empty() && m_pq.top()->time == m_current_time)
     {
         std::string temp = m_pq.top()->wire->setState(m_pq.top()->state, m_current_time);
@@ -180,6 +184,11 @@ bool Circuit::advance(std::ostream& os)
             m_pq.push(e);
         }
     }
+
+    // Print the heap after processing events
+    std::cout << "Heap after processing events: ";
+    m_pq.printHeap();
+
     return true;
 }
 

@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 template <typename T, typename PComparator = std::less<T>>
 class Heap
@@ -17,6 +18,7 @@ public:
   void pop();
   bool empty() const;
   size_t size() const;
+  void printHeap() const; // Add the printHeap function
 
 private:
   std::vector<T> items_;
@@ -93,6 +95,14 @@ void Heap<T,PComparator>::pop() {
   if (!empty()) {
     heapify(0);
   }
+}
+
+template <typename T, typename PComparator>
+void Heap<T,PComparator>::printHeap() const {
+  for (const auto& item : items_) {
+    std::cout << item->time << " ";
+  }
+  std::cout << std::endl;
 }
 
 #endif
