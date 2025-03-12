@@ -13,7 +13,7 @@ struct EventLess
 {
     bool operator()(const Event* e1, const Event* e2) const
     {
-        return e1->time > e2->time; // This ensures a min-heap
+        return e1->time < e2->time; // This ensures a min-heap
     }
 };
 	
