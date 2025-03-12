@@ -145,49 +145,42 @@ bool Circuit::parse(const char* fname)
 
 bool Circuit::advance(std::ostream& os)
 {
-	if(m_pq.size() == 0)
-	{
-		return false;
-	}
-    
+    if (m_pq.size() == 0)
+    {
+        return false;
+    }
+
     m_current_time = m_pq.top()->time;
     std::stringstream ss;
     ss << "@" << m_current_time << std::endl;
     bool updated = false;
-    
-    while(m_pq.top()->time == m_current_time)
+
+    while (!m_pq.empty() && m_pq.top()->time == m_current_time)
     {
-        if(m_pq.size() >= 1)
+        std::string temp = m_pq.top()->wire->setState(m_pq.top()->state, m_current_time);
+        if (temp != "")
         {
-            std::string temp = m_pq.top()->wire->setState(m_pq.top()->state, m_current_time);
-            if(temp != "")
-            {
-                ss << temp << std::endl;
-                updated = true;
-            }
-            delete m_pq.top();
-            m_pq.pop();
-            if(m_pq.size() == 0) break;
+            ss << temp << std::endl;
+            updated = true;
         }
-        else
-        {
-            break;
-        }
-        
+        delete m_pq.top();
+        m_pq.pop();
     }
-    if(updated)
+
+    if (updated)
     {
         os << ss.str();
     }
-    for(auto g : m_gates)
+
+    for (auto g : m_gates)
     {
         Event* e = g->update(m_current_time);
-        if(e)
+        if (e)
         {
             m_pq.push(e);
         }
     }
-	return true;
+    return true;
 }
 
 void Circuit::run(std::ostream& os)
