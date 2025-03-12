@@ -6,7 +6,7 @@
 
 // Use inheritance from std::vector (choose public/private) as appropriate
 template <typename T>
-class Stack : private std::vector<T>
+class Stack
 {
 public:
     Stack();
@@ -44,14 +44,15 @@ void Stack<T>::push(const T& item) {
 
 template <typename T>
 void Stack<T>::pop() {
-    if (empty()) {return;}
+    if (empty()) {std::underflow_error("ERROR: Cannot Pop Empty Stack")}
     std::vector<T>::pop_back();
 }
 
 template <typename T>
 T const& Stack<T>::top() const {
-    if (empty()) {return;}
-    return std::vector<T>::front();
+    if (empty()) {std::underflow_error("ERROR: Cannot Access Top from Empty Stack")}
+    return std::vector<T>::back(); //first in last out
 }
+
 
 #endif
