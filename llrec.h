@@ -94,8 +94,9 @@ Node* llfilter(Node* head, Comp pred)
         head->next = llfilter(head->next, pred);        // it2: 6->next = try 4 = 4     // it3: 4->next = try 9 = nullptr
         return head;                                    // return 6 to it1              // return 4 to it2
     }
-
-}                                                       // 6->next = 4
+                                                        // head = 6
+                                                        // 6->next = 4
                                                         // 4->next = nullptr
+}
 
 #endif
