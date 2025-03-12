@@ -60,16 +60,16 @@ bool Circuit::parse(const char* fname)
     }
     
     std::string line;
-    while( getline(inFile, line))
+    while(getline(inFile, line))
     {
         if(line == "WIRES")
         {
             std::string t_line;
-            getline(inFile,t_line);
+            getline(inFile, t_line);
             int n = stoi(t_line);
-            for(int i = 0;i<n;i++)
+            for(int i = 0; i < n; i++)
             {
-                getline(inFile,t_line);
+                getline(inFile, t_line);
                 std::stringstream ss(t_line);
                 std::string s_id;
                 getline(ss, s_id, ',');
@@ -81,11 +81,11 @@ bool Circuit::parse(const char* fname)
         if(line == "GATES")
         {
             std::string t_line;
-            getline(inFile,t_line);
+            getline(inFile, t_line);
             int n = stoi(t_line);
-            for(int i = 0;i<n;i++)
+            for(int i = 0; i < n; i++)
             {
-                getline(inFile,t_line);
+                getline(inFile, t_line);
                 std::stringstream ss(t_line);
                 std::string s_type;
                 getline(ss, s_type, ',');
