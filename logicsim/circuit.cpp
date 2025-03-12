@@ -156,8 +156,8 @@ bool Circuit::advance(std::ostream& os)
     bool updated = false;
 
     // Print the heap before processing events
-    std::cout << "Heap before processing events: ";
-    m_pq.printHeap();
+    //std::cout << "Heap before processing events: ";
+    //m_pq.printHeap();
 
     while (!m_pq.empty() && m_pq.top()->time == m_current_time)
     {
@@ -186,8 +186,8 @@ bool Circuit::advance(std::ostream& os)
     }
 
     // Print the heap after processing events
-    std::cout << "Heap after processing events: ";
-    m_pq.printHeap();
+    //std::cout << "Heap after processing events: ";
+    //m_pq.printHeap();
 
     return true;
 }
