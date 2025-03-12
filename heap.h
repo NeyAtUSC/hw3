@@ -74,6 +74,9 @@ template <typename T, typename PComparator>
 Heap<T,PComparator>::Heap(int m, PComparator c) : m_(m), c_(c) {}
 
 template <typename T, typename PComparator>
+Heap<T,PComparator>::~Heap() {}
+
+template <typename T, typename PComparator>
 bool Heap<T,PComparator>::empty() const {
   return items_.empty();
 } 
@@ -106,12 +109,11 @@ void Heap<T,PComparator>::heapify(size_t idx) {
 
   for (int i = 1; i<= m_; ++i) {
     size_t child_idx = m_ * idx + i;
-  }
 
-  if (child_idx < items_.size() && c_(items_[child_idx], items_[best_idx])) {
-    best_idx = child_idx;
+    if (child_idx < items_.size() && c_(items_[child_idx], items_[best_idx])) {
+      best_idx = child_idx;
+    }
   }
-
   if (best_idx != idx) {
     std::swap(items_[idx], items_[best_idx]);
     heapify(best_idx);
@@ -129,7 +131,7 @@ T const & Heap<T,PComparator>::top() const
     // ================================
     // throw the appropriate exception
     // ================================
-    throw std::underflow_error("ERROR: cannot access top of empty heap")
+    throw std::underflow_error("ERROR: cannot access top of empty heap");
   }
   // If we get here we know the heap has at least 1 item
   // Add code to return the top element
@@ -148,7 +150,7 @@ void Heap<T,PComparator>::pop()
     // ================================
     // throw the appropriate exception
     // ================================
-    throw std::underflow_error("ERROR: cannot pop from empty heap")
+    throw std::underflow_error("ERROR: cannot pop from empty heap");
 
   }
 
